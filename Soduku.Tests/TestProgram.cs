@@ -68,5 +68,16 @@ namespace Soduku.Tests
             arr[0] = 9;
             Assert.That(Program.IsColumnValid(arr, 0), Is.False);
         }
+
+        [Test]
+        public void TestAreColumnsValid()
+        {
+            var arr = Enumerable.Range(0, 81).ToArray();
+
+            Assert.That(Program.AreColumnsValid(arr), Is.True);
+
+            arr[0] = 9;
+            Assert.That(Program.AreColumnsValid(arr), Is.False);
+        }
     }
 }
