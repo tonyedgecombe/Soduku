@@ -51,9 +51,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sodukuk\Sodukuk.csproj">
+    <ProjectReference Include="..\Sodukuk\Soduku.csproj">
       <Project>{0616be4a-4aa4-4542-8e84-d5475a21075e}</Project>
-      <Name>Sodukuk</Name>
+      <Name>Soduku</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,8 +7,8 @@
     <ProjectGuid>{0616BE4A-4AA4-4542-8E84-D5475A21075E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sodukuk</RootNamespace>
-    <AssemblyName>Sodukuk</AssemblyName>
+    <RootNamespace>Soduku</RootNamespace>
+    <AssemblyName>Soduku</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

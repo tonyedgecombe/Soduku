@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 
-namespace Sodukuk
+namespace Soduku
 {
     public static class Program
     {

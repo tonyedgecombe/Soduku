@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using Sodukuk;
+using Soduku;
 
 namespace Soduku.Tests
 {
