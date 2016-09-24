@@ -42,18 +42,7 @@ namespace Soduku
 
         public static int GetNextTestCell(int[] grid)
         {
-            var result = 0;
-            while (result < 81)
-            {
-                if (grid[result] == 0)
-                {
-                    return result;
-                }
-
-                result++;
-            }
-
-            return result;
+            return Enumerable.Range(0, 82).TakeWhile(i => i < 81 && grid[i] != 0).DefaultIfEmpty(-1).Last() + 1;
         }
 
         public static bool IsValid(int[] grid)
