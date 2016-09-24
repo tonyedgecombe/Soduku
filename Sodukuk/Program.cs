@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Sodukuk
 {
@@ -10,6 +11,57 @@ namespace Sodukuk
         static void Main()
         {
         }
+
+        public static int[] Solve(int[] grid)
+        {
+            Debug.Assert(grid.Length == 81);
+
+            return grid.ToArray();
+        }
+
+        public static int GetNextTestCell(int[] grid)
+        {
+            var result = 0;
+            while (result < 81)
+            {
+                if (grid[result] == 0)
+                {
+                    return result;
+                }
+
+                result++;
+            }
+
+            return result;
+        }
+
+        public static bool IsValid(int[] grid)
+        {
+            return AreColumnsValid(grid) && AreRowsValid(grid) && AreBlocksValid(grid);
+        }
+
+        public static bool AreBlocksValid(int[] grid)
+        {
+            return Enumerable.Range(0, 3).All(rb => Enumerable.Range(0, 3).All(cb => IsBlockValid(grid, rb, cb)));
+        }
+
+        public static bool IsBlockValid(int[] grid, int rb, int cb)
+        {
+            return IsSequenceValid(GetBlock(grid, rb, cb).ToArray());
+        }
+
+        public static IEnumerable<int> GetBlock(int[] grid, int rb, int cb)
+        {
+            for (var column = 0; column < 3; column++)
+            {
+                for (var row = 0; row < 3; row++)
+                {
+                    var pos = (rb*3*9) + row + (cb*3) + column * 9;
+                    yield return grid[pos];
+                }
+            }
+        }
+
 
         public static bool AreRowsValid(int[] grid)
         {
