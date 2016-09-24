@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Soduku
@@ -7,13 +8,36 @@ namespace Soduku
     {
         static void Main()
         {
+            var arr = new int[81];
+            Solve(arr);
         }
 
-        public static int[] Solve(int[] grid)
+        public static bool Solve(int[] grid)
         {
+            var arr = grid.ToArray();
+
             Debug.Assert(grid.Length == 81);
 
-            return grid.ToArray();
+            var nextCell = GetNextTestCell(grid);
+            if (nextCell == 81)
+            {
+                for (int row = 0; row < 9; row++)
+                {
+                    Console.WriteLine(string.Join(",", grid.Skip(9*row).Take(9)));
+                }
+                return true;
+            }
+
+            for (int i = 1; i < 10; i++)
+            {
+                arr[nextCell] = i;
+                if (IsValid(arr) && Solve(arr))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public static int GetNextTestCell(int[] grid)
@@ -58,13 +82,11 @@ namespace Soduku
 
         public static bool AreRowsValid(int[] grid)
         {
-            Debug.Assert(grid.Length == 81);
             return Enumerable.Range(0, 9).All(row => IsRowValid(grid, row));
         }
 
         public static bool AreColumnsValid(int[] grid)
         {
-            Debug.Assert(grid.Length == 81);
             return Enumerable.Range(0, 9).All(column => IsColumnValid(grid, column));
         }
 
@@ -85,13 +107,11 @@ namespace Soduku
 
         public static int[] GetColumn(int[] grid, int column)
         {
-            Debug.Assert(grid.Length == 81);
             return Enumerable.Range(0, 9).Select(r => grid[column + r*9]).ToArray();
         }
 
         public static bool IsSequenceValid(int[] row)
         {
-            Debug.Assert(row.Length == 9);
             return row.Where(c => c != 0).GroupBy(c => c).All(g => g.Count() == 1);
         }
     }
