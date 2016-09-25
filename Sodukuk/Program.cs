@@ -38,20 +38,11 @@ namespace Soduku
                 return grid;
             }
 
-            for (int i = 1; i < 10; i++)
-            {
-                var clone = UpdateElement(grid, nextCell, i);
-                if (IsValid(clone))
-                {
-                    var solution = Solve(clone);
-                    if (solution != null)
-                    {
-                        return solution;
-                    }
-                }
-            }
-
-            return null;
+            return Enumerable.Range(1, 9)
+                .Select(i => UpdateElement(grid, nextCell, i))
+                .Where(IsValid)
+                .Select(Solve)
+                .FirstOrDefault(sol => sol != null);
         }
 
         private static int[] UpdateElement(int[] grid, int cell, int value)
