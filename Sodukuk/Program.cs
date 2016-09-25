@@ -24,10 +24,9 @@ namespace Soduku
 
             var solution = Solve(arr);
 
-            for (int row = 0; row < 9; row++)
-            {
-                Console.WriteLine(string.Join(",", solution.Skip(9 * row).Take(9)));
-            }
+            Console.WriteLine(string.Join("\n", Enumerable.Range(0, 9).Select(
+                row => string.Join(",", solution.Skip(9*row).Take(9))
+            )));
         }
 
         public static int[] Solve(int[] grid)
