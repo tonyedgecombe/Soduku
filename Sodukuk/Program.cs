@@ -40,7 +40,7 @@ namespace Soduku
 
             for (int i = 1; i < 10; i++)
             {
-                var clone = Enumerable.Range(0, 81).Select(index => index == nextCell ? i : grid[index]).ToArray();
+                var clone = UpdateElement(grid, nextCell, i);
                 if (IsValid(clone))
                 {
                     var solution = Solve(clone);
@@ -52,6 +52,11 @@ namespace Soduku
             }
 
             return null;
+        }
+
+        private static int[] UpdateElement(int[] grid, int cell, int value)
+        {
+            return Enumerable.Range(0, 81).Select(i => i == cell ? value : grid[i]).ToArray();
         }
 
         public static int GetNextTestCell(int[] grid)
