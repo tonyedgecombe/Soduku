@@ -32,8 +32,6 @@ namespace Soduku
 
         public static int[] Solve(int[] grid)
         {
-            var clone = grid.ToArray();
-
             var nextCell = GetNextTestCell(grid);
             if (nextCell == 81)
             {
@@ -42,7 +40,7 @@ namespace Soduku
 
             for (int i = 1; i < 10; i++)
             {
-                clone[nextCell] = i;
+                var clone = Enumerable.Range(0, 81).Select(index => index == nextCell ? i : grid[index]).ToArray();
                 if (IsValid(clone))
                 {
                     var solution = Solve(clone);
