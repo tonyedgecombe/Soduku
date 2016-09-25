@@ -33,12 +33,7 @@ namespace Soduku
         public static int[] Solve(int[] grid)
         {
             var nextCell = GetNextTestCell(grid);
-            if (nextCell == 81)
-            {
-                return grid;
-            }
-
-            return SolveForCell(grid, nextCell);
+            return nextCell == 81 ? grid : SolveForCell(grid, nextCell);
         }
 
         private static int[] SolveForCell(int[] grid, int cell)
