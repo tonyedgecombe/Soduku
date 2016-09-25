@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Soduku
@@ -8,36 +8,52 @@ namespace Soduku
     {
         static void Main()
         {
-            var arr = new int[81];
-            Solve(arr);
+            // Solve for an empty grid
+            var arr = new[]
+            {
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0,
+            };
+
+            var solution = Solve(arr);
+
+            for (int row = 0; row < 9; row++)
+            {
+                Console.WriteLine(string.Join(",", solution.Skip(9 * row).Take(9)));
+            }
         }
 
-        public static bool Solve(int[] grid)
+        public static int[] Solve(int[] grid)
         {
-            var arr = grid.ToArray();
-
-            Debug.Assert(grid.Length == 81);
+            var clone = grid.ToArray();
 
             var nextCell = GetNextTestCell(grid);
             if (nextCell == 81)
             {
-                for (int row = 0; row < 9; row++)
-                {
-                    Console.WriteLine(string.Join(",", grid.Skip(9*row).Take(9)));
-                }
-                return true;
+                return grid;
             }
 
             for (int i = 1; i < 10; i++)
             {
-                arr[nextCell] = i;
-                if (IsValid(arr) && Solve(arr))
+                clone[nextCell] = i;
+                if (IsValid(clone))
                 {
-                    return true;
+                    var solution = Solve(clone);
+                    if (solution != null)
+                    {
+                        return solution;
+                    }
                 }
             }
 
-            return false;
+            return null;
         }
 
         public static int GetNextTestCell(int[] grid)
@@ -84,12 +100,12 @@ namespace Soduku
             return IsSequenceValid(GetColumn(grid, column));
         }
 
-        public static bool IsRowValid(int[] grid, int row)
+        public static bool IsRowValid(IEnumerable<int> grid, int row)
         {
             return IsSequenceValid(GetRow(grid, row));
         }
 
-        public static int[] GetRow(int[] grid, int row)
+        public static int[] GetRow(IEnumerable<int> grid, int row)
         {
             return grid.Skip(row*9).Take(9).ToArray();
         }
@@ -99,7 +115,7 @@ namespace Soduku
             return Enumerable.Range(0, 9).Select(r => grid[column + r*9]).ToArray();
         }
 
-        public static bool IsSequenceValid(int[] row)
+        public static bool IsSequenceValid(IEnumerable<int> row)
         {
             return row.Where(c => c != 0).GroupBy(c => c).All(g => g.Count() == 1);
         }
