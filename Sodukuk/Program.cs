@@ -38,11 +38,16 @@ namespace Soduku
                 return grid;
             }
 
+            return SolveForCell(grid, nextCell);
+        }
+
+        private static int[] SolveForCell(int[] grid, int cell)
+        {
             return Enumerable.Range(1, 9)
-                .Select(i => UpdateElement(grid, nextCell, i))
+                .Select(i => UpdateElement(grid, cell, i))
                 .Where(IsValid)
                 .Select(Solve)
-                .FirstOrDefault(sol => sol != null);
+                .FirstOrDefault(solution => solution != null);
         }
 
         private static int[] UpdateElement(int[] grid, int cell, int value)
