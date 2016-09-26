@@ -8,7 +8,6 @@ namespace Sudoku
     {
         static void Main()
         {
-            // Solve for an empty grid
             var arr = new[]
             {
                 0, 4, 0, 0, 1, 0, 0, 0, 0,
@@ -88,7 +87,7 @@ namespace Sudoku
             return Enumerable.Range(0, 9).All(column => IsColumnValid(grid, column));
         }
 
-        public bool IsColumnValid(int[] grid, int column)
+        public bool IsColumnValid(IEnumerable<int> grid, int column)
         {
             return IsSequenceValid(GetColumn(grid, column));
         }
@@ -103,9 +102,9 @@ namespace Sudoku
             return grid.Skip(row*9).Take(9).ToArray();
         }
 
-        public int[] GetColumn(int[] grid, int column)
+        public int[] GetColumn(IEnumerable<int> grid, int column)
         {
-            return Enumerable.Range(0, 9).Select(r => grid[column + r*9]).ToArray();
+            return Enumerable.Range(0, 9).Select(r => grid.ElementAt(column + r*9)).ToArray();
         }
 
         public bool IsSequenceValid(IEnumerable<int> row)
