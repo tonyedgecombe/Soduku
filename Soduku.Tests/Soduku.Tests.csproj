@@ -51,8 +51,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sodukuk\Soduku.csproj">
-      <Project>{0616be4a-4aa4-4542-8e84-d5475a21075e}</Project>
+    <ProjectReference Include="..\Soduku\Soduku.csproj">
+      <Project>{0616BE4A-4AA4-4542-8E84-D5475A21075E}</Project>
       <Name>Soduku</Name>
     </ProjectReference>
   </ItemGroup>
