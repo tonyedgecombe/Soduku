@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 
-namespace Soduku.Tests
+namespace Sudoku.Tests
 {
     [TestFixture]
     public class TestProgram

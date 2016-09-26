@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Soduku
+namespace Sudoku
 {
     public class Program
     {
